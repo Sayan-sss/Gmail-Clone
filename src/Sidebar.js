@@ -10,16 +10,21 @@ import LabelImportantIcon from "@mui/icons-material/LabelImportant";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import NoteIcon from "@mui/icons-material/Note";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import PersonIcon from '@mui/icons-material/Person';
-import DuoIcon from '@mui/icons-material/Duo';
-import PhoneIcon from '@mui/icons-material/Phone';
+import PersonIcon from "@mui/icons-material/Person";
+import DuoIcon from "@mui/icons-material/Duo";
+import PhoneIcon from "@mui/icons-material/Phone";
+import { useDispatch } from "react-redux";
+import { openSendMessage } from "./features/mailSlice";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+
   return (
     <div className="sidebar">
       <Button
         startIcon={<AddIcon fontSize="large" />}
         className="sidebar__compose"
+        onClick={() => dispatch(openSendMessage())}
       >
         Compose
       </Button>
@@ -40,13 +45,13 @@ function Sidebar() {
       <div className="sidebar__footer">
         <div className="sidebar__footerIcon">
           <IconButton>
-            <PersonIcon/>
+            <PersonIcon />
           </IconButton>
           <IconButton>
-            <DuoIcon/>
+            <DuoIcon />
           </IconButton>
           <IconButton>
-            <PhoneIcon/>
+            <PhoneIcon />
           </IconButton>
         </div>
       </div>
