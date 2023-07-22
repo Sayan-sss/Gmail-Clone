@@ -3,22 +3,24 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
-import ErrorIcon from '@mui/icons-material/Error';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EmailIcon from '@mui/icons-material/Email';
-import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import LabelImportantIcon from '@mui/icons-material/LabelImportant';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
-import PrintIcon from '@mui/icons-material/Print';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ErrorIcon from "@mui/icons-material/Error";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EmailIcon from "@mui/icons-material/Email";
+import WatchLaterIcon from "@mui/icons-material/WatchLater";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import LabelImportantIcon from "@mui/icons-material/LabelImportant";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
+import PrintIcon from "@mui/icons-material/Print";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import "./Mail.css";
+import { useSelector } from "react-redux";
+import { selectOpenMail } from "./features/mailSlice";
 
 function Mail() {
-  
   const navigate = useNavigate();
-  
+  const selectedMail = useSelector(selectOpenMail);
+
   return (
     <div className="mail">
       <div className="mail__tools">
@@ -61,7 +63,6 @@ function Mail() {
         </div>
 
         <div className="mail__toolsRight">
-
           <IconButton>
             <UnfoldMoreIcon />
           </IconButton>
@@ -73,20 +74,19 @@ function Mail() {
           <IconButton>
             <ExitToAppIcon />
           </IconButton>
-
         </div>
       </div>
       <div className="mail__body">
-       <div className="mail__bodyHeader">
-        <h2>subject</h2>
-        <LabelImportantIcon className="mail__important" />
-        <p>Title</p>
-        <p className="mail__time">10pm</p>
-       </div>
+        <div className="mail__bodyHeader">
+          <h2>{selectedMail?.subject}</h2>
+          <LabelImportantIcon className="mail__important" />
+          <p>{selectedMail?.title}</p>
+          <p className="mail__time">{selectedMail?.time}</p>
+        </div>
 
-       <div className="mail__message">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid illo neque praesentium dignissimos placeat cum sed cupiditate, asperiores, repellat assumenda provident quas dolorem minus labore sit dolores officia error harum cumque quam aperiam vitae!</p>
-       </div>
+        <div className="mail__message">
+          <p>{selectedMail?.description}</p>
+        </div>
       </div>
     </div>
   );
